@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laplos - Web Design & Development</title>
+
+    <!-- Google Font: Poppins (Bold & Light weights) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Google Font: Open Sans (for body text) -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS Styling (Dark Theme) --- */
+        :root {
+            --primary-color: #00ffff; /* Vibrant Cyan */
+            --secondary-color: #00b0ff; /* Brighter Blue */
+            --dark-color: #1a1a1a; /* Very dark background */
+            --light-dark-color: #2c3e50; /* Slightly lighter dark for contrast sections/elements */
+            --text-color: #ecf0f1; /* Light text on dark */
+            --grey-text: #bdc3c7; /* Lighter grey text */
+            --border-color: rgba(255, 255, 255, 0.1); /* Subtle borders */
+            --gradient-bg: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+        }
+
+        /* Basic Reset and Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.7;
+            color: var(--text-color); /* Default text color is light */
+            background-color: var(--dark-color); /* Default background is dark */
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color); /* Headings are light */
+            line-height: 1.3;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            overflow: hidden;
+            padding: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color); /* Links use primary color */
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--secondary-color); /* Links darken on hover */
+        }
+
+        section {
+            padding: 80px 0;
+            position: relative;
+            border-bottom: 1px solid var(--border-color); /* Subtle separation */
+        }
+
+        section:nth-child(even) { /* Alternate section background */
+            background-color: var(--light-dark-color);
+        }
+
+        section h2 {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 60px;
+            position: relative;
+            color: var(--text-color); /* Section headings are light */
+        }
+
+        section h2::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color); /* Underline uses primary color */
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* Header Styling */
+        header {
+            background: var(--dark-color); /* Dark header */
+            color: var(--text-color);
+            padding: 1.2rem 0;
+            border-bottom: var(--primary-color) 4px solid;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Darker shadow */
+        }
+
+        header .container {
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+        }
+
+        header .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color); /* Logo uses primary color */
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        header nav ul li {
+            margin-left: 30px;
+        }
+
+        header nav ul li a {
+            color: var(--grey-text); /* Nav links are grey */
+            font-weight: 600;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+         header nav ul li a::after {
+             content: '';
+             position: absolute;
+             bottom: -5px;
+             left: 0;
+             width: 0;
+             height: 3px;
+             background: var(--primary-color);
+             transition: width 0.3s ease;
+         }
+        header nav ul li a:hover::after {
+             width: 100%;
+        }
+         header nav ul li a:hover {
+             color: var(--text-color); /* Nav links turn lighter on hover */
+         }
+
+
+        /* Hero Section Styling */
+        .hero {
+             /* Replace with your own high-quality background image URL or path */
+            background: url('https://images.unsplash.com/photo-1517030171627-899196697f7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover; /* Different dark background image */
+            color: var(--text-color);
+            padding: 150px 0;
+            text-align: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            min-height: 70vh; /* Taller hero section */
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+            z-index: 1;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-content h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: var(--white-color); /* White heading */
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            max-width: 900px;
+            color: var(--grey-text); /* Grey text */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--gradient-bg);
+            color: var(--dark-color); /* Dark text on button */
+            padding: 14px 30px;
+            font-size: 1.2rem;
+            font-weight: 700; /* Bolder button text */
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            border: none;
+            text-transform: uppercase; /* Uppercase text */
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            background: var(--primary-color); /* Solid color on hover */
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+            color: var(--dark-color);
+        }
+
+
+        /* Services Section Styling */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .service-item {
+            background: var(--dark-color); /* Darker background for items */
+            padding: 40px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border-top: 5px solid var(--primary-color); /* Highlight border */
+        }
+
+        .service-item:hover {
+             transform: translateY(-15px);
+             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        /* Removed .service-item img styling */
+
+        .service-item h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: var(--primary-color); /* Service headings use primary */
+        }
+
+        .service-item p {
+            font-size: 1.05rem;
+            color: var(--grey-text); /* Service text is grey */
+        }
+
+        /* Why Choose Me Section Styling */
+        .why-choose-me {
+             background-color: var(--dark-color); /* Dark background */
+        }
+
+        .why-points {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+             gap: 40px;
+             text-align: center;
+        }
+
+        .why-points .point {
+            background: var(--light-dark-color); /* Lighter dark background for points */
+            padding: 35px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-left: 5px solid var(--secondary-color); /* Highlight border */
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .why-points .point:hover {
+             transform: translateY(-10px);
+             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Removed .why-points .point img styling */
+
+        .why-points .point h4 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+             color: var(--primary-color); /* Why Choose headings use primary */
+        }
+
+        .why-points .point p {
+            color: var(--grey-text); /* Why Choose text is grey */
+            font-size: 1.05rem;
+        }
+
+        /* Portfolio Section Styling */
+         .portfolio .project-grid {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+             gap: 40px;
+         }
+
+         .portfolio .project-item {
+             background: var(--dark-color); /* Dark background for items */
+             border-radius: 10px;
+             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+             overflow: hidden;
+             transition: transform 0.4s ease, box-shadow 0.4s ease;
+             text-align: center;
+             border-bottom: 5px solid var(--secondary-color); /* Highlight border */
+         }
+         .portfolio .project-item:hover {
+             transform: translateY(-10px);
+             box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+         }
+
+         .portfolio .project-item img {
+             width: 100%;
+             height: 200px;
+             object-fit: cover;
+             transition: transform 0.3s ease;
+         }
+         .portfolio .project-item:hover img {
+             transform: scale(1.05);
+         }
+
+         .portfolio .project-info {
+             padding: 25px;
+             text-align: left;
+         }
+
+         .portfolio .project-info h3 {
+             font-size: 1.5rem;
+             margin-bottom: 10px;
+             color: var(--primary-color); /* Project titles use primary */
+         }
+          .portfolio .project-info p {
+             font-size: 1rem;
+             color: var(--grey-text); /* Project text is grey */
+             margin-bottom: 20px;
+         }
+
+         .portfolio .project-info a {
+             display: inline-block;
+             background: var(--primary-color);
+             color: var(--dark-color); /* Dark text on link button */
+             padding: 10px 20px;
+             border-radius: 5px;
+             font-weight: 600;
+             transition: background 0.3s ease;
+             text-transform: uppercase;
+         }
+          .portfolio .project-info a:hover {
+             background: var(--secondary-color); /* Secondary color on hover */
+         }
+
+
+        /* Contact Section Styling */
+        .contact-intro {
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+            color: var(--grey-text); /* Contact intro text is grey */
+            text-align: center;
+        }
+
+        .contact-info-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .contact-detail {
+            flex: 1;
+            min-width: 320px;
+            background: var(--dark-color); /* Dark background for items */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-align: left;
+            border-bottom: 5px solid var(--primary-color); /* Highlight border */
+        }
+
+        .contact-detail h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color); /* Contact detail headings use primary */
+        }
+
+        .contact-detail p {
+            margin-bottom: 10px;
+            color: var(--grey-text); /* Contact detail text is grey */
+        }
+
+        .contact-detail a {
+            font-weight: 600;
+            color: var(--secondary-color); /* Contact detail links use secondary */
+        }
+         .contact-detail a:hover {
+             color: var(--primary-color); /* Contact detail links use primary on hover */
+         }
+
+
+        /* Footer Styling */
+        footer {
+            background: #111; /* Even darker footer */
+            color: var(--grey-text);
+            text-align: center;
+            padding: 30px 0;
+            font-size: 1rem;
+        }
+
+        footer a {
+             color: var(--secondary-color);
+        }
+        footer a:hover {
+             color: var(--primary-color);
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 992px) { /* Adjust for tablets */
+            .hero-content h2 {
+                font-size: 3rem;
+            }
+             .hero-content p {
+                 font-size: 1.1rem;
+             }
+            section h2 {
+                font-size: 2.2rem;
+            }
+             .service-grid, .why-points, .portfolio .project-grid, .contact-info-box {
+                 gap: 30px;
+             }
+             .service-item, .why-points .point, .contact-detail {
+                 padding: 30px;
+             }
+             .portfolio .project-item img {
+                 height: 180px;
+             }
+             .portfolio .project-info {
+                 padding: 20px;
+             }
+        }
+
+
+        @media (max-width: 768px) { /* Adjust for larger phones/small tablets */
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+             header .logo {
+                 margin-bottom: 15px;
+             }
+
+            header nav ul {
+                margin-top: 10px;
+                justify-content: center;
+            }
+
+            header nav ul li {
+                margin: 0 15px;
+            }
+
+            .hero {
+                padding: 100px 0;
+            }
+
+            .hero-content h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+            section h2 {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+
+             /* Removed icon adjustments */
+
+             .service-item h3, .why-points .point h4 {
+                 font-size: 1.4rem;
+             }
+             .service-item p, .why-points .point p, .portfolio .project-info p {
+                 font-size: 0.95rem;
+             }
+
+             .portfolio .project-item img {
+                 height: 150px;
+             }
+
+             .contact-info-box {
+                 flex-direction: column;
+                 align-items: center;
+                 gap: 30px;
+             }
+
+             .contact-detail {
+                 width: 100%;
+                 min-width: auto;
+                 padding: 30px;
+             }
+        }
+
+        @media (max-width: 480px) { /* Adjust for small phones */
+             header .logo {
+                 font-size: 1.8rem;
+             }
+             header nav ul li {
+                 margin: 0 10px;
+             }
+              .hero-content h2 {
+                font-size: 2rem;
+            }
+             .hero-content p {
+                font-size: 0.95rem;
+            }
+             .cta-button {
+                padding: 10px 20px;
+                font-size: 1rem;
+             }
+            section h2 {
+                 font-size: 1.8rem;
+             }
+             .service-item, .why-points .point, .contact-detail {
+                 padding: 25px;
+             }
+             .portfolio .project-item img {
+                 height: 120px;
+             }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">Laplos</div> <!-- Website Name -->
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                     <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Expert Web Solutions by Laplos</h2> <!-- Updated Headline -->
+                <p>Delivering custom website designs and development, alongside ready-made templates to launch your online presence.</p> <!-- Updated Text -->
+                <a href="#services" class="cta-button">Explore Services</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2>What I Offer</h2>
+            <div class="service-grid">
+                <div class="service-item">
+                    <!-- Removed icon -->
+                    <h3>Custom Website Design</h3>
+                    <p>Beautiful, modern, and user-friendly designs tailored specifically to your brand and goals.</p>
+                </div>
+                <div class="service-item">
+                    <!-- Removed icon -->
+                    <h3>Website Development</h3>
+                    <p>Bringing designs to life with robust, responsive, and high-performance code (HTML, CSS, JS).</p>
+                </div>
+                 <div class="service-item">
+                     <!-- Removed icon -->
+                    <h3>Ready-Made Websites & Templates</h3>
+                    <p>Choose from a selection of professionally designed templates for a faster and more affordable solution.</p>
+                </div>
+                <div class="service-item">
+                     <!-- Removed icon -->
+                    <h3>Consultation & Support</h3>
+                    <p>Get expert advice on your web project and reliable support to keep your site running smoothly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- Portfolio Section -->
+     <section id="portfolio" class="portfolio">
+         <div class="container">
+             <h2>My Work</h2>
+             <p class="contact-intro">Here's a glimpse of what I can build. More projects available upon request!</p>
+             <div class="project-grid">
+                 <div class="project-item">
+                     <!-- Replace with an actual screenshot of your game if possible -->
+                     <img src="https://via.placeholder.com/400x200/00b0ff/1a1a1a?text=Lapis+Tank+Battle" alt="Screenshot of Lapis Tank Battle">
+                     <div class="project-info">
+                         <h3>Lapis Tank Battle</h3>
+                         <p>A fun tank battle game project developed using web technologies.</p>
+                         <a href="https://kismat8178.github.io/LapisTankBattle/" target="_blank">View Project</a>
+                     </div>
+                 </div>
+                 <!-- You can add more project items here following the same structure -->
+                 <!--
+                 <div class="project-item">
+                     <img src="https://via.placeholder.com/400x200/2c3e50/ecf0f1?text=Website+Project+2" alt="Screenshot of Project 2">
+                      <div class="project-info">
+                         <h3>Business Website Example</h3>
+                         <p>A modern website built for a local business.</p>
+                         <a href="#" target="_blank">View Project</a>
+                     </div>
+                 </div>
+                 -->
+             </div>
+         </div>
+     </section>
+
+
+    <section id="why-choose-me" class="why-choose-me">
+        <div class="container">
+             <h2>Why Work With Laplos?</h2> <!-- Updated Heading -->
+             <div class="why-points">
+                 <div class="point">
+                     <!-- Removed icon -->
+                     <h4>Quality & Precision</h4>
+                     <p>I build websites that are not just beautiful but also functional, fast, and reliable.</p>
+                 </div>
+                  <div class="point">
+                       <!-- Removed icon -->
+                     <h4>Direct Collaboration</h4>
+                     <p>Work directly with the developer who understands your needs without layers of middlemen.</p>
+                 </div>
+                  <div class="point">
+                       <!-- Removed icon -->
+                     <h4>Client Success Focused</h4>
+                     <p>My goal is to help you achieve your online objectives with a website that truly works for you.</p>
+                 </div>
+             </div>
+        </div>
+    </section>
+
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Let's Connect</h2>
+            <p class="contact-intro">Whether you're in Nepal or abroad, let's talk about your website needs.</p>
+
+            <div class="contact-info-box">
+                <div class="contact-detail">
+                    <h3>For Clients in Nepal:</h3>
+                    <p>I'm based in Nepal and available for in-person meetings to discuss your project face-to-face.</p>
+                     <p>Reach out via phone or email to schedule a convenient time and place.</p>
+                     <p><strong>Phone/WhatsApp:</strong> <a href="tel:+9779802806179">+977 9802806179</a></p>
+                     <p><strong>Email:</strong> <a href="mailto:kgiri8178@gmail.com">kgiri8178@gmail.com</a></p>
+                </div>
+                <div class="contact-detail">
+                     <h3>For Clients Outside Nepal:</h3>
+                    <p>Distance is not a barrier! I work with clients globally through online communication.</p>
+                    <p>Feel free to call/message on WhatsApp or send an email with your requirements.</p>
+                     <p><strong>Phone/WhatsApp:</strong> <a href="tel:+9779802806179">+977 9802806179</a></p>
+                     <p><strong>Email:</strong> <a href="mailto:kgiri8178@gmail.com">kgiri8178@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Laplos. All rights reserved.</p> <!-- Updated Year and Name -->
+        </div>
+    </footer>
+
+    <script>
+        // --- JavaScript Functionality (Smooth Scrolling) ---
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('header nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent default jump
+
+                const targetId = this.getAttribute('href'); // Get target section ID (e.g., #services)
+                const targetElement = document.querySelector(targetId); // Find the element
+
+                if (targetElement) {
+                    const headerOffset = document.querySelector('header').offsetHeight;
+                    const elementPosition = targetElement.offsetTop;
+                    const offsetPosition = elementPosition - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth' // Enable smooth scrolling
+                    });
+                }
+            });
+        });
+
+        // API Key usage removed completely as requested.
+        // The functions handleAPILoaded and the API status element are gone.
+
+    </script>
+
+</body>
+</html>
