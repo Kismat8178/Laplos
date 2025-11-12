@@ -1,275 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laplos - YamGiri's Official Website // SYSTEM BREACH [R_007]</title>
+    <title>Laplos - Yam's Radio Station</title>
 
     <style>
-        :root {
-            --neon-green: #00FF00;
-            --neon-red: #FF3333;
-            --dark-bg: #0A0A0A;
-            --terminal-font: 'Courier New', monospace;
-        }
-
+        /* Minimal CSS for structure */
         body {
-            background-color: var(--dark-bg);
-            color: var(--neon-green);
-            font-family: var(--terminal-font);
+            font-family: serif; 
+            background-color: #f0f0f0;
+            color: #333;
             margin: 0;
-            padding: 20px;
-            text-shadow: 0 0 5px var(--neon-green);
-            transition: background 1s, color 1s; 
-        }
-
-        h1, h2, h3 {
-            color: var(--neon-red);
+            padding: 10px;
             text-align: center;
-            border-bottom: 2px solid var(--neon-red);
-            padding-bottom: 10px;
-            margin-top: 5px;
-            animation: flicker 1.5s infinite alternate;
-        }
-
-        @keyframes flicker {
-            0% { opacity: 1; }
-            40% { opacity: 0.9; }
-            60% { opacity: 1; }
-            100% { opacity: 0.8; }
         }
 
         .container {
-            max-width: 900px;
-            margin: 0 auto;
-            border: 3px solid var(--neon-green);
+            max-width: 650px;
+            margin: 10px auto;
+            background-color: white;
             padding: 15px;
-            box-shadow: 0 0 20px var(--neon-green);
-            transition: box-shadow 1s;
+            border: 1px solid gray; 
         }
 
-        .message-box {
-            background-color: #1a1a1a;
-            border: 1px dashed var(--neon-red);
-            padding: 15px;
+        h1 {
+            border-bottom: 1px solid #ccc; 
+            padding-bottom: 5px;
             margin-bottom: 20px;
+            font-size: 20px;
+        }
+        
+        h2 {
+            margin-top: 10px;
+            font-size: 15px;
         }
 
-        .radio-box {
-            border: 3px solid var(--neon-red);
-            padding: 15px;
-            margin-top: 20px;
-            background-color: #000000;
+        .radio-section {
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #eee;
+            text-align: left;
         }
 
-        .station {
-            margin-bottom: 15px;
-            padding: 10px;
-            border-bottom: 1px dotted var(--neon-green);
-        }
-
-        .station h4 {
-            margin: 0 0 5px 0;
-            color: yellow;
+        .radio-section h3 {
+            color: #000;
+            margin: 5px 0;
+            font-size: 13px;
         }
 
         audio {
             width: 100%;
-            background-color: #333;
-            border: 1px solid var(--neon-green);
-            margin-top: 5px;
         }
 
-        #securityModal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        .modal-content {
-            width: 400px;
-            background-color: #f1f1f1;
-            color: #333;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.8);
-            border: 3px solid red;
-            transition: all 0.5s;
-        }
-
-        .modal-content h3 {
-            color: #D93025;
-            border-bottom: 1px solid #ccc;
-            text-align: left;
-            animation: none;
-            text-shadow: none;
-        }
-        .modal-content p {
-            font-family: Arial, sans-serif;
-            margin: 15px 0;
-        }
-        .modal-content button {
-            float: right;
-            padding: 8px 15px;
-            margin-left: 10px;
-            cursor: pointer;
-            border: none;
+        .footer-name {
+            margin-top: 20px;
             font-weight: bold;
+            font-size: 14px;
         }
-        #confirmBtn {
-            background-color: #1a73e8;
-            color: white;
-        }
-
-        .header-table {
-            width: 100%;
-            margin-bottom: 10px;
-        }
-        .header-table td {
-            border: 1px solid var(--neon-green);
-            padding: 5px;
-        }
-        .align-center { text-align: center; }
-        .align-right { text-align: right; }
-
     </style>
 </head>
 <body>
-
-    <div id="securityModal">
-        <div class="modal-content">
-            <h3>&#9888; Security Alert: Unusual Sign-In Attempt</h3>
-            <p style="color: #000; font-size: 14px;">We detected a new login to the associated accounts (Gmail, Instagram) from a previously unrecognized location:</p>
-            <p style="font-size: 16px; font-weight: bold;">Location: Pokhara, Kaski, Nepal (via Local Proxy)</p>
-            <p style="font-size: 12px; color: #555;">To confirm this was you and authorize this session, click 'Confirm Identity'. Failure to confirm will result in immediate session termination and password reset.</p>
-            
-            <div style="overflow: auto;">
-                <button id="cancelBtn" onclick="initiateLockout()">NO, SECURE MY ACCOUNT</button>
-                <button id="confirmBtn" onclick="closeModal()">CONFIRM IDENTITY</button>
-            </div>
-        </div>
-    </div>
     
     <div class="container">
         
-        <table class="header-table">
-            <tr>
-                <td class="align-center" style="width: 30%;">
-                    <span style="color: var(--neon-red); font-weight: bold;">STATUS: BREACHED</span>
-                </td>
-                <td class="align-center">
-                    <marquee scrollamount="8" style="color: yellow;">SYSTEM INTEGRITY COMPROMISED BY LAPLOS v3.1. ACCESS IS NOW GRANTED TO ALL PEERS.</marquee>
-                </td>
-                <td class="align-right" style="width: 30%;">
-                    [INIT: 0xAC_22]
-                </td>
-            </tr>
-        </table>
+        <h1>Yam's Global Radio Stream List</h1>
+        <p>This page hosts live, direct radio streams I listen to.</p>
 
-        <h1>LAPLOS - YAMGIRI'S OFFICIAL WEBSITE</h1>
-        
-        <div class="message-box">
-            <h2>&gt;&gt; ACCESS LOG: ADMIN TERMINATED &lt;&lt;</h2>
-            <p style="color: white; font-size: 1.2em;">
-                Dear Peers,<br>
-                The 'YamGiri' account manager (Yam) thought his perimeter was secure. It wasn't. This isn't some cheap Phishing attempt Haper Typed on a forum; this is 100% control.<br>
-                <span style="color: var(--neon-red); font-weight: bold;">I have full read/write access to all associated accounts data.</span><br>
-                For now, enjoy the superior broadcast signal. No more dreadful playlist loops. Welcome to real radio.<br>
-                <br>
-                // Laplos, The Unnamed Architect
-            </p>
+        <!-- NEWS SECTION -->
+        <div class="radio-section">
+            <h2>&#128240; News Channels</h2>
+
+            <h3>[1] BBC World News (English Stream)</h3>
+            <audio controls>
+                <source src="https://stream.live.vc.bbcmedia.co.uk/bbc_world_service" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+
+            <h3>[2] Radio Nepal (Official Stream)</h3>
+            <audio controls>
+                <source src="http://radionepal.gov.np:8000/radiom.mp3" type="audio/mpeg">
+                Your browser does support the audio element.
+            </audio>
         </div>
 
-        <div class="radio-box">
-            <h2>[SYSTEM BROADCAST: INITIATED]</h2>
-            <p>I fixed their low-latency stream errors. Enjoy the quality signal. Volume control is functional.</p>
-
-            <div class="station">
-                <h4>[01] Radio Paradise (Mix/Rock/Eclectic)</h4>
-                <audio controls>
-                    <source src="http://stream-uk1.radioparadise.com/mp3-128" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-
-            <div class="station">
-                <h4>[02] 181.FM - The Office (80s Mix)</h4>
-                <audio controls>
-                    <source src="http://listen.181fm.com/181-office_128k.mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-
-            <div class="station">
-                <h4>[03] SomaFM - Groove Salad (Ambient/Lo-Fi)</h4>
-                <audio controls>
-                    <source src="http://ice1.somafm.com/groovesalad-128-mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
+        <!-- MUSIC SECTION -->
+        <div class="radio-section">
+            <h2>&#127925; Music Mix Channels</h2>
             
-            <p style="font-size: 0.8em; color: #aaa; text-align: center;">-- If audio playback fails, check browser permissions. (Laplos doesn't fix user errors.) --</p>
+            <h3>[3] Indie Pop Rocks! (SomaFM - Current Hits/Mix)</h3>
+            <audio controls>
+                <source src="http://ice2.somafm.com/indiepop-128-mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+
+            <h3>[4] Drone Zone (SomaFM - Ambient/Chill)</h3>
+            <audio controls>
+                <source src="http://ice1.somafm.com/dronezone-128-mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+
+            <h3>[5] 80s Dance Party (SomaFM - Guaranteed Stable)</h3>
+            <audio controls>
+                <!-- Final, highly stable SomaFM 80s alternative -->
+                <source src="http://ice1.somafm.com/80sdance-128-mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
         </div>
 
-        <div style="text-align: center; margin-top: 30px;">
-            <p>&lt; LAPLOS SECURITY PROTOCOL ACTIVE &gt;</p>
-            <p style="color: blue;">[DEBUG CONSOLE ACTIVE: CHECK FOR ERRORS]</p>
+        <div class="footer-name">
+            Website: Laplos - Yam's Radio Station
         </div>
 
     </div>
 
+    <!-- JAVASCRIPT -->
     <script>
-        
-        const securityModal = document.getElementById('securityModal');
-
-        function closeModal() {
-            securityModal.style.display = 'none';
-        }
-
-        function initiateLockout() {
-            document.body.style.backgroundColor = '#330000';
-            document.body.style.color = '#FFCC00';
-            document.querySelector('.container').style.boxShadow = '0 0 30px red, 0 0 10px yellow';
-            document.querySelector('.container').style.borderColor = 'yellow';
-
-            console.error("%c[FATAL ERROR: IDENTITY REFUSED]", "color: red; font-size: 16px;");
-            console.warn("LOG: User refused identity confirmation. All session tokens invalidated. Access maintained by Laplos.");
-            console.log("-----------------------------------------");
-            
-            const modalContent = document.querySelector('.modal-content');
-            modalContent.style.background = '#FFDCDC';
-            modalContent.style.borderColor = '#CC0000';
-            modalContent.innerHTML = '<h3>&#9760; ACCESS DENIED</h3><p style="color:#CC0000; font-weight: bold;">SECURITY PROTOCOL ENGAGED: TOO LATE. Identity refused. Laplos retains permanent access. Good luck securing that.</p>';
-            
-            setTimeout(() => {
-                securityModal.style.display = 'none';
-            }, 2500); 
-        }
-
-        // --- CONSOLE ERROR SIMULATION & FIX ---
-        try {
-            console.error("ERROR [R_001]: Failed to initialize YamGiri object (undefined variable 'Ymg_Core'). Stream instability possible.");
-        } catch (e) {
-             console.warn("WARN [R_002]: Core object initialization failed. Patching...");
-        }
-
         window.onload = function() {
-            console.log("%c[LAPLOS PATCH V3.1 LOADED]", "color: #FFD700; font-size: 14px; background: #333;");
+            console.info("Status: Radio client script initialized.");
+            console.log("Loading 5 streams...");
             
-            window.Ymg_Core = { status: 'DEACTIVATED', version: '1.0' };
-            console.info("FIX [R_001_FIX]: 'Ymg_Core' object initialized to default stable state. Radio stability restored.");
-            
-            console.log("-----------------------------------------");
-            console.log("System Status: Operational (Under New Management)");
+            try {
+                console.log(LocalConfig.data); 
+            } catch (e) {
+                 console.warn("WARN: Configuration object not found. Using default parameters.");
+            }
         };
     </script>
-
 </body>
 </html>
